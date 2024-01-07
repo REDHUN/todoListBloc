@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todolist/add_todo_page.dart';
+import 'package:todolist/bloc/todo_bloc.dart';
 import 'package:todolist/cubit/todo_cubit.dart';
 import 'package:todolist/todo_list.dart';
 
@@ -13,8 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TodoCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TodoBloc(),
+        ),
+        BlocProvider(
+          create: (context) => TodoCubit(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

@@ -6,6 +6,7 @@ class TodoCubit extends Cubit<List<Todo>> {
   void addTodo(String title) {
     if (title.isEmpty) {
       addError('Please enter title');
+      return;
     }
     final todo = Todo(name: title, createdAt: DateTime.now());
     emit([...state, todo]);
@@ -20,6 +21,6 @@ class TodoCubit extends Cubit<List<Todo>> {
   @override
   void onError(Object error, StackTrace stackTrace) {
     super.onError(error, stackTrace);
-    print(error);
+    print('TodoCubit - $error');
   }
 }
